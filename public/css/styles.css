@@ -1,0 +1,154 @@
+body {
+    font-family: "Plus Jakarts Sans", "sans-serif";
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.container {
+    flex: 1;
+}
+
+/* navbar */
+.navbar {
+    height: 5rem;
+    background-color: white;
+}
+
+.fa-compass {
+    font-size: 2rem;
+    color: #851919;
+
+}
+
+.nav-link {
+    font-size: 1rem !important;
+    color: #222222 !important;
+}
+
+.navbar-nav .ms-auto {
+    gap: 1rem !important;
+}
+
+/* footer */
+.f-info {
+    background-color: #ebebeb;
+    height: 10rem;
+    display: flex;
+    justify-content: center;
+    align-items: space-evenly;
+    text-align: center;
+    flex-wrap: wrap;
+}
+
+.f-info-links,
+.f-info-socials,
+f-info-brand {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.f-info-socials {
+    font-size: 1.3rem;
+}
+
+.f-info-socials i {
+    margin-right: 1.6rem;
+    color: #222222;
+
+    &:hover {
+        color: #5b5f78;
+    }
+}
+
+.f-info-links a {
+    color: #222222;
+    text-decoration: none;
+    margin-right: 1.3rem;
+
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+/* Cards */
+
+.listing-card {
+    margin-bottom: 1.7rem;
+    border: none !important;
+}
+
+.card-img-top {
+    border-radius: 1rem !important;
+    object-fit: cover;
+    width: 100% !important;
+    height: 20rem !important;
+}
+
+.listing-link {
+    text-decoration: none;
+}
+
+/* Card Effect */
+.card-img-overlay {
+    opacity: 0;
+
+    &:hover {
+        opacity: 0.2;
+        background-color: white;
+    }
+}
+
+/* New List Page */
+.add-btn {
+    background-color: #851919 !important;
+    border: none !important;
+
+    &:hover {
+        opacity: 0.8 !important;
+    }
+}
+
+
+/* Edit List page */
+.edit-btn {
+    background-color: #851919 !important;
+    border: none !important;
+
+    &:hover {
+        opacity: 0.8 !important;
+    }
+}
+
+
+/* Show listing Page  */
+.show-img {
+    height: 30vh;
+}
+
+.btns {
+    display: flex;
+}
+
+.show-card {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+
+/* MAP */
+#map {
+    height: 500px;
+    width: 100vh;
+}
+
+.marker {
+    display: block;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 0;
+}

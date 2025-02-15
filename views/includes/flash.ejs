@@ -1,0 +1,15 @@
+<!-- as successMsg is a array that already exists thus we have to create both the conditions. -->
+<% if(successMsg && successMsg.length){ %>
+    <div class="alert alert-success alert-dismissible fade show col-6 offset-3 mt-2" role="alert">
+        <%= successMsg %>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    <% } %>
+
+
+    <% if(errorMsg && errorMsg.length){ %>
+        <div class="alert alert-danger alert-dismissible fade show col-6 offset-3 mt-2" role="alert">
+            <%= errorMsg %>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <% } %>    

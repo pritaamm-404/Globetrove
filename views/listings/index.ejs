@@ -1,0 +1,85 @@
+<% layout("/layouts/boilerplate") %>
+    <style>
+        #filters {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .filter {
+            margin-right: 2rem;
+            text-align: center;
+            margin-top: 2rem;
+            opacity: 0.7;
+
+            &:hover {
+                opacity: 1;
+                cursor: pointer;
+            }
+            .filter i{
+                color: black;
+                text-decoration: none ; 
+            }
+        }
+        .filter a {
+            color: black;
+            text-decoration: none;
+        }
+    </style>
+    <div id="filters">
+        <div class="filter">
+                <div><a href="/listings?category=Trending"><i class="fa-solid fa-fire"></i></a></div>
+                <p>Trending</p>
+        </div>
+        <div class="filter">
+            <div><a href="/listings?category=Beachfront"><i class="fa-solid fa-umbrella-beach"></i></a></div>
+            <p>Beachfront</p>
+        </div>
+        <div class="filter">
+            <div><a href="/listings?category=Top Cities"><i class="fa-solid fa-building-columns"></i></a></div>
+            <p>Top Cities</p>
+        </div>
+        <div class="filter">
+            <div><a href="/listings?category=Mountains"><i class="fa-solid fa-mountain-city"></i></a></div>
+            <p>Mountains</p>
+        </div>
+        <div class="filter">
+            <div><a href="/listings?category=Arctics"><i class="fa-solid fa-snowman"></i></a></div>
+            <p>Arctics</p>
+        </div>
+        <div class="filter">
+            <div><a href="/listings?category=Castles"><i class="fa-brands fa-fort-awesome"></i></a></div>
+            <p>Castles</p>
+        </div>
+        <div class="filter">
+            <div><a href="/listings?category=Amazing Pools"><i class="fa-solid fa-person-swimming"></i></a></div>
+            <p>Amazing Pools</p>
+        </div>
+        <div class="filter">
+            <div><a href="/listings?category=Farms"><i class="fa-solid fa-cow"></i></a></div>
+            <p>Farms</p>
+        </div>
+    </div>
+    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3 ">
+
+        <% for(let listing of allListings){ %>
+     
+            <a href="/listings/<%= listing._id %>" class="listing-link">
+                <div class="card col listing-card">
+                    <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_image">
+                    <div class="card-img-overlay"></div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            <b>
+                                <%= listing.title %>
+                            </b>
+                            <br>
+                            <%= listing.location %>
+                                <br>
+                                &#8377;<%= listing.price ? listing.price.toLocaleString("en-IN") : "N/A" %> /
+                                    night
+                        </p>
+                    </div>
+                </div>
+                <% } %>
+            </a>
+    </div>

@@ -1,0 +1,78 @@
+<style>
+    /* Style for search input */
+    .navbar .form-control {
+        width: 300px;
+        /* Adjust width */
+        padding: 0.5rem 3rem 0.5rem 3rem;
+        /* top right bottom left */
+        border: 1px solid #ccc;
+        border-radius: 25px;
+        /* Rounded corners */
+        outline: none;
+        transition: all 0.3s ease-in-out;
+    }
+
+    /* Focus effect */
+    .navbar .form-control:focus {
+        border-color: #851919;
+        box-shadow: 0 0 5px rgba(133, 25, 25, 0.5);
+    }
+
+    /* Style for search button */
+    .btn-search {
+        background-color: #851919;
+        color: aliceblue;
+        border-radius: 25px;
+        padding: 10px 15px;
+        border: none;
+        transition: all 0.3s ease-in-out;
+        opacity: 1;
+
+        &:hover {
+            background-color: #fbfbfb;
+            color: rgb(0, 0, 0);
+            border: 1px solid;
+            border-color: #851919;
+            box-shadow: 0 0 5px rgba(133, 25, 25, 0.5);
+            /* opacity: .7; */
+        }
+    }
+
+    /* Icon inside the button */
+    .btn-search i {
+        margin-right: 0.6rem;
+    }
+</style>
+
+<nav class="navbar navbar-expand-md bg-body-light border-bottom sticky-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/"><i class="fa-solid fa-compass"></i></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+            aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-link " href="/listings">Explore</a>
+                <a class="nav-link" href="#">Features</a>
+            </div>
+            <div class="navbar-nav  ms-auto">
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search your destination">
+                    <button class="btn btn-search" type="submit"><i class="fas fa-search"></i>Search</button>
+                </form>
+            </div>
+            <div class="navbar-nav  ms-auto">
+                <a class="nav-link" href="/listings/new">Globetrove your home</a>
+                <% if(!currUser) {%>
+                    <a class="nav-link " href="/signup"><b>Create Account</b></a>
+                    <a class="nav-link " href="/login"><b>Login</b></a>
+                    <% } %>
+                        <% if(currUser) {%>
+                            <a class="nav-link" href="/logout"><b>Logout </b></a>
+                            <% } %>
+            </div>
+
+        </div>
+    </div>
+</nav>
