@@ -32,6 +32,7 @@ router
 //LogOut Route..............
 router.get("/logout", userController.logout);
 
+//NEW CODE
 //Send Password Reset OTP Route.....................................................................
 router.route("/send-reset-otp", userController.sendPasswordResetOtp);
 

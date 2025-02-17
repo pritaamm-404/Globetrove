@@ -1,8 +1,14 @@
 <% layout("/layouts/boilerplate") %> <!-- boilerplate layout is used here -->
     <script>
-        const mapToken = "<%= process.env.MAP_TOKEN %>"; // mapbox token is used here to display the map on the show page of the listing . JS file can not access the env variables directly so we are passing it from the ejs file.
-        const listing = <% - JSON.stringify(listing) %>;
-        // console.log("Coordinates from EJS:", coordinates); //Debugging
+        const mapToken = "<%= mapToken %>"; // mapbox token is used here to display the map on the show page of the listing . JS file can not access the env variables directly so we are passing it from the ejs file.
+        console.log("Mapbox Token EJS is accepting."); // Debugging log
+        const listing = "<% - JSON.stringify(listing) %>";
+        console.log("Listing from EJS:", listing); // Debugging log
+
+        // const coordinates = listing?.geometry?.coordinates?.length === 2
+        //     ? listing.geometry.coordinates
+        //     : [7.2265, 46.0966]; // Default location
+        console.log("Coordinates from EJS:", coordinates);//Debugging
         // coordinates of the listing are passed to the map.js file to display the map on the show page of the listing; JSON.stringify is used to convert the coordinates to string so that it can be passed to the js file.
     </script>
 
@@ -110,4 +116,6 @@
 
                 </div>
     </div>
-    <script src="/js/map.js"></script> <!-- map.js file is used to display the map on the show page of the listing -->
+    <script src="/js/map.js" defer></script>
+    <!-- map.js file is used to display the map on the show page of the listing -->
+    <!--Defer ✅ Ensure it loads after mapToken is defined -->

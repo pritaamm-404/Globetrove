@@ -31,7 +31,10 @@ module.exports.showListings = async (req, res) => {
     res.redirect("/listings");
   }
   // console.log(listing);
-  res.render("listings/show.ejs", { listing });
+  res.render("listings/show.ejs", {
+    listing,
+    mapToken: process.env.MAP_TOKEN, // ✅ Pass the token properly
+  });
 };
 
 //Show filtered Listings based on the category................................................

@@ -1,10 +1,11 @@
-const Review = require("../models/review");// Import the review model
-const Listing = require("../models/listing");// Import the Listing model
+const Review = require("../models/review"); // Import the review model
+const Listing = require("../models/listing"); // Import the Listing model
 
 //Review Routes...............................................
 //POST Route for creating a review
 
 module.exports.createReview = async (req, res) => {
+  console.log("Request Body:", req.body); // Add this line
   const { id } = req.params;
   const listing = await Listing.findById(id);
   if (!listing) {

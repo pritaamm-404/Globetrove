@@ -33,12 +33,14 @@ const MongoStore = require("connect-mongo");
 const passport = require("passport"); //Passport is Express-compatible authentication middleware for Node.js.
 const LocalStrategy = require("passport-local"); //Passport strategy for authenticating with a username and password.
 const User = require("./models/user.js"); //Users Schema access
+const Listing = require("./models/listing.js"); //Listing Schema access
 
 const listingRouter = require("./routes/listing.js"); // Ensure the correct path to the listing router
 const reviewRouter = require("./routes/review.js"); // Ensure the correct path to the reviews router
 const userRouter = require("./routes/user.js"); // Ensure the correct path to the user router
 
 //MONGODB URL = "mongodb://127.0.0.1:27017/wanderlust"
+
 main()
   .then(() => {
     console.log("Connection successful to DB!!!!!");
@@ -48,6 +50,16 @@ main()
 async function main() {
   await mongoose.connect(process.env.ATLASDB_URL);
 }
+// console.log("Mapbox Token from .env:-", process.env.MAP_TOKEN);
+
+// mongoose
+//   .connect(process.env.ATLASDB_URL, {})
+//   .then(async () => {
+//     const listings = await Listing.find({});
+//     console.log(listings); // This should print your listings with coordinates
+//     mongoose.connection.close();
+//   })
+//   .catch((err) => console.log(err));
 
 const store = MongoStore.create({
   mongoUrl: process.env.ATLASDB_URL,
@@ -96,7 +108,11 @@ app.use((req, res, next) => {
   res.locals.errorMsg = req.flash("error");
   res.locals.currUser = req.user;
   // console.log("Incoming Request:", req.method, req.url); //Debugging
+  next();
+});
 
+app.use((req, res, next) => {
+  res.locals.MAPBOX_TOKEN = process.env.MAP_TOKEN; // ✅ Ensure this is set globally
   next();
 });
 

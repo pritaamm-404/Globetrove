@@ -48,7 +48,7 @@ module.exports.renderLoginForm = (req, res) => {
 //Passport provides an authenticate() function, which is used as route middleware to authenticate requests....
 //login helping route.....
 module.exports.login = async (req, res) => {
-  console.log("Redirect URL in session:", req.session.redirectUrl); // Debugging
+  // console.log("Redirect URL in session:", req.session.redirectUrl); // Debugging
   req.flash("success", "Welcome back to the world of Globetrove's!");
   let redirectUrl = res.locals.redirectUrl || "/listings"; //original code
 
