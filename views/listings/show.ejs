@@ -1,15 +1,20 @@
 <% layout("/layouts/boilerplate") %> <!-- boilerplate layout is used here -->
-    <script>
-        const mapToken = "<%= mapToken %>"; // mapbox token is used here to display the map on the show page of the listing . JS file can not access the env variables directly so we are passing it from the ejs file.
-        console.log("Mapbox Token EJS is accepting."); // Debugging log
-        const listing = "<% - JSON.stringify(listing) %>";
-        console.log("Listing from EJS:", listing); // Debugging log
 
-        // const coordinates = listing?.geometry?.coordinates?.length === 2
-        //     ? listing.geometry.coordinates
-        //     : [7.2265, 46.0966]; // Default location
-        console.log("Coordinates from EJS:", coordinates);//Debugging
-        // coordinates of the listing are passed to the map.js file to display the map on the show page of the listing; JSON.stringify is used to convert the coordinates to string so that it can be passed to the js file.
+    <script>
+        // Ensure mapToken is defined and valid
+        const mapToken = "<%= mapToken %>";
+        console.log("Mapbox Token:"); // Debugging
+
+        // Parse the listing object correctly
+        const listing = "<%= JSON.stringify(listing) %>";
+        console.log("Listing Data:", listing); // Debugging
+        const listingCoordinates = "<% - JSON.stringify(listing.geometry.coordinates) %>";
+
+        console.log("Coordinates:", listingCoordinates); // Debugging
+        // Extract coordinates with a fallback
+        const coordinates = listing.geometry?.coordinates || [7.2265, 46.0966]; // Default fallback
+        console.log("Coordinates:", coordinates); // Debugging
+
     </script>
 
     <div class="row mt-3 mb-5">
@@ -116,6 +121,21 @@
 
                 </div>
     </div>
-    <script src="/js/map.js" defer></script>
+
+
+    <script>// Initialize the map
+        mapboxgl.accessToken = mapToken;
+        const map = new mapboxgl.Map({
+            container: 'map', // The id of the div element
+            style: 'mapbox://styles/mapbox/streets-v11', // Mapbox style
+            center: coordinates, // Set map center to the coordinates
+            zoom: 13, // Set the zoom level
+        });
+
+        // Create a marker at the coordinates"
+        const marker = new mapboxgl.Marker({ color: "brown" })
+            .setLngLat(coordinates) // Place the marker at the coordinates
+            .addTo(map); // Add the marker to the map
+    </script>
     <!-- map.js file is used to display the map on the show page of the listing -->
     <!--Defer ✅ Ensure it loads after mapToken is defined -->

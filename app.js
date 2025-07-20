@@ -69,8 +69,8 @@ const store = MongoStore.create({
   touchAfter: 24 * 3600,
 });
 
-store.on("error", () => {
-  console.log("ERROR in ATLAS MONGO_STORE");
+store.on("error", (err) => {
+  console.log("ERROR in ATLAS MONGO_STORE", err);
 });
 
 //Middleware for session and flash messages using connect-flash npm package and express-session npm package to store the session data in the session store

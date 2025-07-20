@@ -24,6 +24,11 @@ body {
 .nav-link {
     font-size: 1rem !important;
     color: #222222 !important;
+    transition: all 0.3s ease-in-out !important;
+
+    &:hover {
+        color: #851919 !important;
+    }
 }
 
 .navbar-nav .ms-auto {

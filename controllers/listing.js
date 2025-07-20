@@ -20,20 +20,37 @@ module.exports.renderNewForm = (req, res) => {
 
 //SHOW ROUTE......................................
 module.exports.showListings = async (req, res) => {
+  // const { id } = req.params;
+  // const listing = await Listing.findById(id)
+  //   .populate({ path: "reviews", populate: { path: "author" } })
+  //   .populate("owner"); //Populating the reviews field in the listing model with the reviews data from the review model
+
+  // // Validating the listing id to check if it exists or not so that no one can access the invalid listing id through the URL or Hopscotch API
+  // if (!listing) {
+  //   req.flash("error", "Listing you requested for does not exist.");
+  //   res.redirect("/listings");
+  // }
+  // // console.log(listing);
+  // res.render("listings/show.ejs", {
+  //   listing,
+  //   mapToken: process.env.MAP_TOKEN, // ✅ Pass the token properly
+  // });
   const { id } = req.params;
   const listing = await Listing.findById(id)
     .populate({ path: "reviews", populate: { path: "author" } })
-    .populate("owner"); //Populating the reviews field in the listing model with the reviews data from the review model
+    .populate("owner");
 
-  // Validating the listing id to check if it exists or not so that no one can access the invalid listing id through the URL or Hopscotch API
   if (!listing) {
     req.flash("error", "Listing you requested for does not exist.");
     res.redirect("/listings");
   }
-  // console.log(listing);
+
+  // Pass the listing details and coordinates to the view
   res.render("listings/show.ejs", {
     listing,
-    mapToken: process.env.MAP_TOKEN, // ✅ Pass the token properly
+    mapToken: process.env.MAP_TOKEN, // :white_check_mark: Pass the token properly
+    // Pass coordinates to the view for Mapbox
+    coordinates: listing.geometry ? listing.geometry.coordinates : [0, 0], // Ensure a valid array
   });
 };
 
@@ -72,12 +89,20 @@ module.exports.showCategoryListings = async (req, res) => {
 //CREATE ROUTE....................................
 
 module.exports.createListings = async (req, res, next) => {
-  let response = await geocodingClient //Using the geocodingClient to get the coordinates of the location provided in the listing form
+  // let response = await geocodingClient //Using the geocodingClient to get the coordinates of the location provided in the listing form
+  //   .forwardGeocode({
+  //     query: req.body.listing.location, //Querying the location field in the listing form to get the coordinates
+  //     limit: 1,
+  //   })
+  //   .send();
+  let response = await geocodingClient
     .forwardGeocode({
-      query: req.body.listing.location, //Querying the location field in the listing form to get the coordinates
+      query: req.body.listing.location, // Querying the location field in the listing form to get the coordinates
       limit: 1,
     })
     .send();
+
+  // The rest of your create logic follows
 
   let url = req.file.path;
   let filename = req.file.filename;
@@ -99,7 +124,7 @@ module.exports.createListings = async (req, res, next) => {
   res.redirect(`/listings/${newListing._id}`);
 };
 
-//EDIT ROUTE......................................
+//EDIT ROUTE..........................................
 
 module.exports.renderEditForm = async (req, res) => {
   const { id } = req.params;
